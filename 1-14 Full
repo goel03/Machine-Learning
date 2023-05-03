@@ -1,0 +1,606 @@
+# Implement Linear Regression with one variable through gradient decent
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the training data
+lr.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = lr.predict(X_test)
+
+import matplotlib.pyplot as plt
+
+# Plot the data and the linear regression line
+plt.scatter(X_test, y_test, color='blue')
+plt.plot(X_test, y_pred, color='red')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+# Implement linear regression with multiple variables through gradient decent
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the training data
+lr.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = lr.predict(X_test)
+
+# Calculate the mean squared error (MSE)
+mse = mean_squared_error(y_test, y_pred)
+
+print(f"Mean squared error: {mse:.2f}")
+
+# Repeat question 1 and 2 with normal equation method.
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the data using the normal equation method
+lr.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2], [0.3], [0.4]]
+y_pred = lr.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lr.coef_}")
+print(f"Intercept: {lr.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+# Linear Regression with multiple variables using Normal Equation:
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the data using the normal equation method
+lr.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2, 0.4, 0.6], [0.3, 0.5, 0.7], [0.4, 0.6, 0.8]]
+y_pred = lr.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lr.coef_}")
+print(f"Intercept: {lr.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+
+# Linear Regression with one variable using Lasso regularization:
+
+import numpy as np
+from sklearn.linear_model import Lasso
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Create a Lasso object with alpha=0.1
+lasso = Lasso(alpha=0.1)
+
+# Fit the model to the data
+lasso.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2], [0.3], [0.4]]
+y_pred = lasso.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lasso.coef_}")
+print(f"Intercept: {lasso.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+
+# Linear Regression with multiple variables using Lasso regularization:
+
+import numpy as np
+from sklearn.linear_model import Lasso
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Create a Lasso object with alpha=0.1
+lasso = Lasso(alpha=0.1)
+
+# Fit the model to the data
+lasso.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2, 0.4, 0.6], [0.3, 0.5, 0.7], [0.4, 0.6, 0.8]]
+y_pred = lasso.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lasso.coef_}")
+print(f"Intercept: {lasso.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+
+# Implement Logistic Regression with one variable through gradient decent
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = np.array([1 if x > 0.5 else 0 for x in X]).ravel()
+
+# Create a SGDClassifier object with loss='log'
+lr = SGDClassifier(loss='log', alpha=0.01, max_iter=1000, tol=1e-3)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X, y, color='black')
+x_vals = np.linspace(0, 1, 100).reshape(-1, 1)
+y_vals = lr.predict_proba(x_vals)[:, 1]
+plt.plot(x_vals, y_vals, color='blue', linewidth=2)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+# Implement Logistic regression with multiple variables through gradient decent
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a SGDClassifier object with loss='log'
+lr = SGDClassifier(loss='log', alpha=0.01, max_iter=1000, tol=1e-3)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10), np.linspace(y_min, y_max, 10))
+Z = lr.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.5)
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.show()
+
+
+# Normal Method one Variable
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=1, n_redundant=0, n_informative=1,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object
+lr = LogisticRegression(solver='newton-cg', C=1e5)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], y, c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+xx = np.linspace(x_min, x_max, 10)
+Z = lr.predict_proba(xx.reshape(-1, 1))[:, 1]
+plt.plot(xx, Z, color='blue', linewidth=3)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+# Two Variable Normal Method
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object
+lr = LogisticRegression(solver='newton-cg', C=1e5)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10), np.linspace(y_min, y_max, 10))
+Z = lr.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.5)
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=1, n_redundant=0, n_informative=1,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object with regularization
+lr = LogisticRegression(penalty='l2', C=1, solver='liblinear')
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], y, c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+xx = np.linspace(x_min, x_max, 10)
+Z = lr.predict_proba(xx.reshape(-1, 1))[:, 1]
+plt.plot(xx, Z, color='blue', linewidth=3)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object with regularization
+lr = LogisticRegression(penalty='l2', C=1, solver='liblinear')
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10), np.linspace(y_min, y_max, 10))
+Z = lr.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.5)
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.show()
+
+
+
+
+# Implement Nave Bayes Classifier algorithm for classification problem
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+
+# Split the data into features (X) and target (y)
+X = iris.data
+y = iris.target
+
+# Initialize the Naive Bayes Classifier model
+gnb = GaussianNB()
+
+# Perform cross-validation and get predicted labels for each fold
+y_pred = cross_val_predict(gnb, X, y, cv=10)
+
+# Get the confusion matrix
+cm = confusion_matrix(y, y_pred)
+
+# Plot the confusion matrix using Seaborn heatmap
+sns.heatmap(cm, annot=True, cmap="Blues", xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.title("Confusion Matrix")
+
+# Calculate accuracy
+accuracy = accuracy_score(y, y_pred)
+
+# Print the accuracy score
+print("Accuracy:", (accuracy*100),"%")
+
+
+# Implement K-Means algorithms for clustering problem using sklearn package.
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.cluster import KMeans
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+
+# Split the data into features (X) and target (y)
+X = iris.data
+y = iris.target
+
+# Initialize the K-Means clustering model with 3 clusters (corresponding to the 3 classes in the Iris dataset)
+kmeans = KMeans(n_clusters=3, random_state=0)
+
+# Perform clustering and get predicted labels
+y_pred = kmeans.fit_predict(X)
+
+# Get the confusion matrix
+cm = confusion_matrix(y, y_pred)
+
+# Plot the confusion matrix using Seaborn heatmap
+sns.heatmap(cm, annot=True, cmap="Blues", xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.title("Confusion Matrix")
+
+# Calculate clustering accuracy
+accuracy = accuracy_score(y, y_pred)
+
+# Print the clustering accuracy
+print("Clustering Accuracy:", accuracy)
+
+
+# Implement SVM classifier for classification problem using sklearn package.
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.svm import SVC
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+
+# Split the data into features (X) and target (y)
+X = iris.data
+y = iris.target
+
+# Initialize the SVM classifier model
+svm = SVC(kernel='linear')
+
+# Perform cross-validation and get predicted labels for each fold
+y_pred = cross_val_predict(svm, X, y, cv=10)
+
+# Get the confusion matrix
+cm = confusion_matrix(y, y_pred)
+
+# Plot the confusion matrix using Seaborn heatmap
+sns.heatmap(cm, annot=True, cmap="Blues", xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.title("Confusion Matrix")
+
+# Calculate accuracy
+accuracy = accuracy_score(y, y_pred)
+
+# Print the accuracy score
+print("Accuracy:", accuracy)
+
+
+# Implement Decision Tree algorithm for classification problem using sklearn package.
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+
+# Split the data into features (X) and target (y)
+X = iris.data
+y = iris.target
+
+# Initialize the Decision Tree classifier model
+dtc = DecisionTreeClassifier()
+
+# Perform cross-validation and get predicted labels for each fold
+y_pred = cross_val_predict(dtc, X, y, cv=10)
+
+# Get the confusion matrix
+cm = confusion_matrix(y, y_pred)
+
+# Plot the confusion matrix using Seaborn heatmap
+sns.heatmap(cm, annot=True, cmap="Blues", xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.title("Confusion Matrix")
+
+# Calculate accuracy
+accuracy = accuracy_score(y, y_pred)
+
+# Print the accuracy score
+print("Accuracy:", accuracy)
+
+
+# Implement KNN algorithms for classification and regression problem using sklearn package.
+
+# Classfication 
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+
+# Split the data into features (X) and target (y)
+X = iris.data
+y = iris.target
+
+# Initialize the KNN classifier model
+k = 5
+knn = KNeighborsClassifier(n_neighbors=k)
+
+# Perform cross-validation and get predicted labels for each fold
+y_pred = cross_val_predict(knn, X, y, cv=10)
+
+# Get the confusion matrix
+cm = confusion_matrix(y, y_pred)
+
+# Plot the confusion matrix using Seaborn heatmap
+sns.heatmap(cm, annot=True, cmap="Blues", xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.title("Confusion Matrix")
+
+# Calculate accuracy
+accuracy = accuracy_score(y, y_pred)
+
+# Print the accuracy score
+print("Accuracy:", accuracy)
+
+
+# Regression 
+
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
+# Load the Boston Housing dataset
+boston = load_iris()
+
+# Split the data into features (X) and target (y)
+X = boston.data
+y = boston.target
+
+# Initialize the KNN regressor model
+k = 5
+knn = KNeighborsRegressor(n_neighbors=k)
+
+# Perform cross-validation and get predicted target values for each fold
+y_pred = cross_val_predict(knn, X, y, cv=10)
+
+# Calculate mean squared error and R-squared
+mse = mean_squared_error(y, y_pred)
+r2 = r2_score(y, y_pred)
+
+# Print the mean squared error and R-squared
+print("Mean Squared Error:", mse)
+print("R-squared:", r2)
+
+
+# Implement Neural Network algorithm for classification problem using sklearn package.
+
+from sklearn.datasets import load_iris
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+# Load the dataset
+iris = load_iris()
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+
+# Initialize the MLPClassifier
+mlp = MLPClassifier(hidden_layer_sizes=(5, 2), max_iter=1000)
+
+# Fit the MLPClassifier on the training data
+mlp.fit(X_train, y_train)
+
+# Predict the labels of the test data
+y_pred = mlp.predict(X_test)
+
+# Evaluate the performance of the model using cross-validation and a confusion matrix
+scores = cross_val_score(mlp, iris.data, iris.target, cv=10)
+print("Cross-validation scores:", scores)
+print("Average cross-validation score:", scores.mean())
+print("Confusion matrix:\n", confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
+
+
+
+
+
