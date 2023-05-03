@@ -1,0 +1,31 @@
+#Implement Linear Regression with one variable through gradient decent
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the training data
+lr.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = lr.predict(X_test)
+
+import matplotlib.pyplot as plt
+
+# Plot the data and the linear regression line
+plt.scatter(X_test, y_test, color='blue')
+plt.plot(X_test, y_pred, color='red')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
