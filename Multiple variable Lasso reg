@@ -1,0 +1,24 @@
+import numpy as np
+from sklearn.linear_model import Lasso
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Create a Lasso object with alpha=0.1
+lasso = Lasso(alpha=0.1)
+
+# Fit the model to the data
+lasso.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2, 0.4, 0.6], [0.3, 0.5, 0.7], [0.4, 0.6, 0.8]]
+y_pred = lasso.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lasso.coef_}")
+print(f"Intercept: {lasso.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
