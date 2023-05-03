@@ -1,0 +1,347 @@
+# Implement Linear Regression with one variable through gradient decent
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the training data
+lr.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = lr.predict(X_test)
+
+import matplotlib.pyplot as plt
+
+# Plot the data and the linear regression line
+plt.scatter(X_test, y_test, color='blue')
+plt.plot(X_test, y_pred, color='red')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+# Implement linear regression with multiple variables through gradient decent
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the training data
+lr.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = lr.predict(X_test)
+
+# Calculate the mean squared error (MSE)
+mse = mean_squared_error(y_test, y_pred)
+
+print(f"Mean squared error: {mse:.2f}")
+
+# Repeat question 1 and 2 with normal equation method.
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the data using the normal equation method
+lr.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2], [0.3], [0.4]]
+y_pred = lr.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lr.coef_}")
+print(f"Intercept: {lr.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+# Linear Regression with multiple variables using Normal Equation:
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Create a LinearRegression object
+lr = LinearRegression()
+
+# Fit the model to the data using the normal equation method
+lr.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2, 0.4, 0.6], [0.3, 0.5, 0.7], [0.4, 0.6, 0.8]]
+y_pred = lr.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lr.coef_}")
+print(f"Intercept: {lr.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+
+# Linear Regression with one variable using Lasso regularization:
+
+import numpy as np
+from sklearn.linear_model import Lasso
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = 2 + 3 * X + np.random.randn(100, 1)
+
+# Create a Lasso object with alpha=0.1
+lasso = Lasso(alpha=0.1)
+
+# Fit the model to the data
+lasso.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2], [0.3], [0.4]]
+y_pred = lasso.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lasso.coef_}")
+print(f"Intercept: {lasso.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+
+# Linear Regression with multiple variables using Lasso regularization:
+
+import numpy as np
+from sklearn.linear_model import Lasso
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 3)
+y = 2 + 3 * X[:, 0] + 5 * X[:, 1] + 1.5 * X[:, 2] + np.random.randn(100)
+
+# Create a Lasso object with alpha=0.1
+lasso = Lasso(alpha=0.1)
+
+# Fit the model to the data
+lasso.fit(X, y)
+
+# Make predictions on new data
+new_X = [[0.2, 0.4, 0.6], [0.3, 0.5, 0.7], [0.4, 0.6, 0.8]]
+y_pred = lasso.predict(new_X)
+
+# Print the coefficients and intercept
+print(f"Coefficients: {lasso.coef_}")
+print(f"Intercept: {lasso.intercept_}")
+
+# Print the predictions
+print(f"Predictions: {y_pred}")
+
+
+# Implement Logistic Regression with one variable through gradient decent
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = np.array([1 if x > 0.5 else 0 for x in X]).ravel()
+
+# Create a SGDClassifier object with loss='log'
+lr = SGDClassifier(loss='log', alpha=0.01, max_iter=1000, tol=1e-3)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X, y, color='black')
+x_vals = np.linspace(0, 1, 100).reshape(-1, 1)
+y_vals = lr.predict_proba(x_vals)[:, 1]
+plt.plot(x_vals, y_vals, color='blue', linewidth=2)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+# Implement Logistic regression with multiple variables through gradient decent
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a SGDClassifier object with loss='log'
+lr = SGDClassifier(loss='log', alpha=0.01, max_iter=1000, tol=1e-3)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10), np.linspace(y_min, y_max, 10))
+Z = lr.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.5)
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.show()
+
+
+# Normal Method one Variable
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=1, n_redundant=0, n_informative=1,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object
+lr = LogisticRegression(solver='newton-cg', C=1e5)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], y, c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+xx = np.linspace(x_min, x_max, 10)
+Z = lr.predict_proba(xx.reshape(-1, 1))[:, 1]
+plt.plot(xx, Z, color='blue', linewidth=3)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+# Two Variable Normal Method
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object
+lr = LogisticRegression(solver='newton-cg', C=1e5)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10), np.linspace(y_min, y_max, 10))
+Z = lr.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.5)
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=1, n_redundant=0, n_informative=1,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object with regularization
+lr = LogisticRegression(penalty='l2', C=1, solver='liblinear')
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], y, c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+xx = np.linspace(x_min, x_max, 10)
+Z = lr.predict_proba(xx.reshape(-1, 1))[:, 1]
+plt.plot(xx, Z, color='blue', linewidth=3)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# Generate some random data
+np.random.seed(0)
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                             n_clusters_per_class=1, random_state=0)
+
+# Create a LogisticRegression object with regularization
+lr = LogisticRegression(penalty='l2', C=1, solver='liblinear')
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10), np.linspace(y_min, y_max, 10))
+Z = lr.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.5)
+plt.xlabel('X1')
+plt.ylabel('X2')
+plt.show()
+
+
