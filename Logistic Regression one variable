@@ -1,0 +1,23 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+
+# Generate some random data
+np.random.seed(0)
+X = np.random.rand(100, 1)
+y = np.array([1 if x > 0.5 else 0 for x in X]).ravel()
+
+# Create a SGDClassifier object with loss='log'
+lr = SGDClassifier(loss='log', alpha=0.01, max_iter=1000, tol=1e-3)
+
+# Fit the model to the data
+lr.fit(X, y)
+
+# Plot the decision boundary
+plt.scatter(X, y, color='black')
+x_vals = np.linspace(0, 1, 100).reshape(-1, 1)
+y_vals = lr.predict_proba(x_vals)[:, 1]
+plt.plot(x_vals, y_vals, color='blue', linewidth=2)
+plt.xlabel('X')
+plt.ylabel('y')
+plt.show()
